@@ -20,6 +20,10 @@ namespace GestionDeStockCusHabitat.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Entree> Entrees { get; set; }
+        public DbSet<Sortie> Sorties { get; set; }
+        public DbSet<Utilisateur> Utilisateurs { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
