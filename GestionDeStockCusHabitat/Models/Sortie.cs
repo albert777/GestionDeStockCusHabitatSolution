@@ -17,5 +17,7 @@ namespace GestionDeStockCusHabitat.Models
         public string Categorie { get; set; }
         [Required]
         public DateTime DateTime { get; set; }
+        [Required]
+        public Client Client { get; set; }
     }
 }

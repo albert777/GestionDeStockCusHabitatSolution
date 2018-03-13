@@ -8,6 +8,17 @@ namespace GestionDeStockCusHabitat.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Clients",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Nom = c.String(nullable: false),
+                        Prenom = c.String(nullable: false),
+                        Email = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Entrees",
                 c => new
                     {
@@ -51,8 +62,11 @@ namespace GestionDeStockCusHabitat.Migrations
                         QteArticle = c.Int(nullable: false),
                         Categorie = c.String(nullable: false),
                         DateTime = c.DateTime(nullable: false),
+                        Client_Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Clients", t => t.Client_Id, cascadeDelete: true)
+                .Index(t => t.Client_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -119,10 +133,12 @@ namespace GestionDeStockCusHabitat.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Sorties", "Client_Id", "dbo.Clients");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.Sorties", new[] { "Client_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
@@ -134,6 +150,7 @@ namespace GestionDeStockCusHabitat.Migrations
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Entrees");
+            DropTable("dbo.Clients");
         }
     }
 }

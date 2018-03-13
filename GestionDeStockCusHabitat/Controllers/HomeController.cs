@@ -15,14 +15,14 @@ namespace GestionDeStockCusHabitat.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Application Crée en C# ASP.NET MVC par Jordan SANOGO";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Pour me Contacter";
 
             return View();
         }
