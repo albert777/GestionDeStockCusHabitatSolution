@@ -6,17 +6,14 @@ using System.Web;
 
 namespace GestionDeStockCusHabitat.Models
 {
-    public class Entree
+    public class Inventaire
     {
         public int Id { get; set; }
-        [Required][Display(Name = "Nom de l'article")]
+        [Required]
         public string NomArticle { get; set; }
-        [Required][Display(Name = "Quantité")]
+        [Required]
         public int QteArticle { get; set; }
-        [Required][Display(Name = "Catégorie")]
+        [Required]
         public string Categorie { get; set; }
-        [Required][Display(Name = "Date d'ajout")]
-        public DateTime DateTime { get; set; }
-
     }
 }

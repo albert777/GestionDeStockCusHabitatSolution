@@ -1,0 +1,38 @@
+﻿@using GestionDeStockCusHabitat.Models
+@model List<GestionDeStockCusHabitat.Models.Inventaire>
+
+@{
+    ViewBag.Title = "Inventaire";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Inventaire</h2>
+
+@if (!Model.Any())
+{
+    <p>Pas d'article présent.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Articles</th>
+            <th>Quantité</th>
+            <th>Catégorie</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var inventaire in Model)
+            {
+                <tr>
+                    <td>@inventaire.Id</td>
+                    <td>@inventaire.NomArticle</td>
+                    <td>@inventaire.QteArticle</td>
+                    <td>@inventaire.Categorie</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

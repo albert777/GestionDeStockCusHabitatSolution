@@ -24,6 +24,7 @@ namespace GestionDeStockCusHabitat.Models
         public DbSet<Sortie> Sorties { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Inventaire> Inventaires { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

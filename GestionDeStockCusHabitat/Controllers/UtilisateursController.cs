@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure.MappingViews;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,21 +26,16 @@ namespace GestionDeStockCusHabitat.Controllers
         }
 
         [Route("utilisateurs")]
-        public ViewResult Index()
+        public ViewResult UtilisateurResult()
         {
             var utilisateurs = _context.Utilisateurs.ToList();
 
             return View(utilisateurs);
         }
 
-        [Route("utilisateurs/{id}")]
-        public ActionResult Details(int id)
+        public ActionResult New()
         {
-            var utilisateur = _context.Utilisateurs.SingleOrDefault(c => c.Id == id);
-
-            if (utilisateur == null)
-                return HttpNotFound();
-            return View(utilisateur);
+            return View();
         }
 
     }

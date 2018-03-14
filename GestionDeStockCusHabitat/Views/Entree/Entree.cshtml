@@ -1,0 +1,39 @@
+﻿@using GestionDeStockCusHabitat.Models
+@model List<GestionDeStockCusHabitat.Models.Entree>
+
+@{
+    ViewBag.Title = "Entrees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Les Entrées</h2>
+
+@if (!Model.Any())
+{
+    <p>Pas d'articles entrées</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Nom de l'article</th>
+            <th>Quantité</th>
+            <th>Catégorie</th>
+            <th>Date d'entrée</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var entrees in Model)
+        {
+            <tr>
+                <td>@entrees.NomArticle</td>
+                <td>@entrees.QteArticle</td>
+                <td>@entrees.Categorie</td>
+                <td>@entrees.DateTime.ToShortDateString()</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+@Html.ActionLink("Ajouter une nouvelle entrée","AjouterEntree","Entree", new {@class = "btn btn-primary"})

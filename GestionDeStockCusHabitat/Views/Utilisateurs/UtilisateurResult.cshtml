@@ -25,9 +25,9 @@ else
         @foreach (var utilisateur in Model)
         {
             <tr>
-                <td>@Html.ActionLink(utilisateur.Nom, "Details", "Utilisateurs", new {id = utilisateur.Id}, null)</td>
-                <td>@Html.ActionLink(utilisateur.Prenom, "Details", "Utilisateurs", new {id = utilisateur.Id}, null)</td>
-                <td>@Html.ActionLink(utilisateur.Email, "Details", "Utilisateurs", new {id = utilisateur.Id}, null)</td>
+                <td>@Html.ActionLink(utilisateur.Nom, "UtilisateurResult", "Utilisateurs", new {id = utilisateur.Id}, null)</td>
+                <td>@Html.ActionLink(utilisateur.Prenom, "UtilisateurResult", "Utilisateurs", new {id = utilisateur.Id}, null)</td>
+                <td>@Html.ActionLink(utilisateur.Email, "UtilisateurResult", "Utilisateurs", new {id = utilisateur.Id}, null)</td>
             </tr>
         }
         </tbody>
