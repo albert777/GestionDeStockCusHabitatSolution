@@ -1,0 +1,26 @@
+﻿
+@model GestionDeStockCusHabitat.Models.Article
+
+@{
+    ViewBag.Title = "Ajouter article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter article</h2>
+@using (Html.BeginForm("Create", "Article"))
+{
+    <div class="form-group">
+        @Html.LabelFor(e => e.NomArticle)
+        @Html.TextBoxFor(e => e.NomArticle, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(e => e.QteArticle)
+        @Html.TextBoxFor(e => e.QteArticle, new { @class = "form-control", pattern = @"\d{*}" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(e => e.Categorie)
+        @Html.TextBoxFor(e => e.Categorie, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(e => e.Id)
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+}

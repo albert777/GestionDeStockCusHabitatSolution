@@ -1,0 +1,27 @@
+﻿@model Sortie
+@using GestionDeStockCusHabitat.Models
+
+@{
+    ViewBag.Title = "Sortie d'un article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sortie d'un article</h2>
+@using (Html.BeginForm("SortirUnArticle", "Sortie"))
+{
+    <div class="form-group">
+        @Html.LabelFor(a => a.Article.NomArticle)
+        @Html.DropDownListFor(a => a.Article.NomArticle, , "Selectionner un article")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(a => a.Article.QteArticle)
+        @Html.TextBoxFor(a => a.Article.QteArticle, new { @class = "form-control", pattern = @"\d{*}" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(a => a.Client)
+        @Html.DropDownListFor(a => a.Client.Id, , "Selectionner un client")
+    </div>
+    @Html.HiddenFor(s => s.Article.Id, )
+    @Html.HiddenFor(s => s.Id)
+    <button type="submit" class="btn btn-primary">Valider la sortie</button>
+}

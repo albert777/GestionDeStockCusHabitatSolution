@@ -1,0 +1,36 @@
+﻿@model List<GestionDeStockCusHabitat.Models.Client>
+
+@{
+    ViewBag.Title = "Liste des clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Clients</h2>
+
+@if (!Model.Any())
+{
+    <p>Aucun client présent</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var clients in Model)
+        {
+            <tr>
+                <td>@clients.Nom</td>
+                <td>@clients.Prenom</td>
+                <td>@clients.Email</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+@Html.ActionLink("Ajouter un nouveau client", "Ajouter", "Client", new { @class = "btn btn-primary" })

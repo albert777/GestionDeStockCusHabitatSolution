@@ -1,5 +1,4 @@
-﻿@using GestionDeStockCusHabitat.Models
-@model List<GestionDeStockCusHabitat.Models.Entree>
+﻿@model List<GestionDeStockCusHabitat.Models.Entree>
 
 @{
     ViewBag.Title = "Entrees";
@@ -8,6 +7,8 @@
 
 <h2>Les Entrées</h2>
 
+@*Retourne sous forme de tableau les données présentent dans la table Entree
+    Model fait réference au @model List<GestionDeStockCusHabitat.Models.Entree>*@
 @if (!Model.Any())
 {
     <p>Pas d'articles entrées</p>
@@ -20,7 +21,7 @@ else
             <th>Nom de l'article</th>
             <th>Quantité</th>
             <th>Catégorie</th>
-            <th>Date d'entrée</th>
+            <th>Heure et date d'entrée</th>
         </tr>
         </thead>
         <tbody>
@@ -30,10 +31,10 @@ else
                 <td>@entrees.NomArticle</td>
                 <td>@entrees.QteArticle</td>
                 <td>@entrees.Categorie</td>
-                <td>@entrees.DateTime.ToShortDateString()</td>
+                <td>@entrees.DateTime.ToShortTimeString() - @entrees.DateTime.ToShortDateString()</td>
             </tr>
         }
         </tbody>
     </table>
 }
-@Html.ActionLink("Ajouter une nouvelle entrée","AjouterEntree","Entree", new {@class = "btn btn-primary"})
+@Html.ActionLink("Ajouter une nouvelle entrée","Ajouter","Entree", new {@class = "btn btn-primary"})

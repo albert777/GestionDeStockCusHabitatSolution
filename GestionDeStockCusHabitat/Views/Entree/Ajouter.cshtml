@@ -1,0 +1,30 @@
+﻿@model Article
+@using GestionDeStockCusHabitat.Models
+
+@{
+    ViewBag.Title = "Entree";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var entree = new Entree();
+    var dbContext = new ApplicationDbContext();
+    IEnumerable<SelectListItem> articleItems = dbContext.Articles.Select(c => new SelectListItem()
+    {
+        Value = c.NomArticle,
+        Text = c.NomArticle,
+    })
+        .Distinct();
+}
+
+<h2>Entree</h2>
+@using (Html.BeginForm("Create", "Entree"))
+{
+    <div class="form-group">
+        @Html.LabelFor(a => a.NomArticle)
+        @Html.DropDownListFor(a => a.NomArticle, articleItems,"Selectionner un article")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(a => a.QteArticle)
+        @Html.TextBoxFor(a => a.QteArticle, new { @class = "form-control", pattern=@"\d{*}" })
+    </div>
+    @Html.HiddenFor(e => entree.Id)
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+}

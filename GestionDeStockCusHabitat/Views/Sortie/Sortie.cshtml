@@ -1,0 +1,40 @@
+﻿@model GestionDeStockCusHabitat.ViewModel.SortieViewModel
+
+@{
+    ViewBag.Title = "Les sorties";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Les Sorties</h2>
+
+@if (!Model.Sorties.Any())
+{
+    <p>Aucun article n'a été sortie</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nom de l'article</th>
+                <th>Quantité</th>
+                <th>Catégorie</th>
+                <th>Pour</th>
+                <th>Heure et date de sortie</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sorties in Model.Sorties)
+            {
+                <tr>
+                    <td>@sorties.Article.NomArticle</td>
+                    <td>@sorties.Article.QteArticle</td>
+                    <td>@sorties.Article.Categorie</td>
+                    <td>@sorties.Client.Nom @sorties.Client.Prenom</td>
+                    <td>@sorties.DateTime.ToShortTimeString() - @sorties.DateTime.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@Html.ActionLink("Ajouter une nouvelle sortie", "SortieArticle", "Sortie", new { @class = "btn btn-primary" })
