@@ -242,6 +242,18 @@
     <Compile Include="Migrations\201804132353452_ModifModels5.Designer.cs">
       <DependentUpon>201804132353452_ModifModels5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804140933451_ModifModels6.cs" />
+    <Compile Include="Migrations\201804140933451_ModifModels6.Designer.cs">
+      <DependentUpon>201804140933451_ModifModels6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804141215412_ModifModels7.cs" />
+    <Compile Include="Migrations\201804141215412_ModifModels7.Designer.cs">
+      <DependentUpon>201804141215412_ModifModels7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804141247086_ModifModels8.cs" />
+    <Compile Include="Migrations\201804141247086_ModifModels8.Designer.cs">
+      <DependentUpon>201804141247086_ModifModels8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -252,6 +264,9 @@
     <Compile Include="Models\Sortie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\ArticleViewModel.cs" />
+    <Compile Include="ViewModel\ClientViewModel.cs" />
+    <Compile Include="ViewModel\EntreeViewModel.cs" />
     <Compile Include="ViewModel\SortieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +417,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804132353452_ModifModels5.resx">
       <DependentUpon>201804132353452_ModifModels5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140933451_ModifModels6.resx">
+      <DependentUpon>201804140933451_ModifModels6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141215412_ModifModels7.resx">
+      <DependentUpon>201804141215412_ModifModels7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141247086_ModifModels8.resx">
+      <DependentUpon>201804141247086_ModifModels8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

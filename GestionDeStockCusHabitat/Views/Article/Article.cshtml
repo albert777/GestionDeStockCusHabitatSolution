@@ -1,4 +1,4 @@
-﻿@model List<GestionDeStockCusHabitat.Models.Article>
+﻿@model GestionDeStockCusHabitat.ViewModel.ArticleViewModel
 
 @{
     ViewBag.Title = "Inventaire";
@@ -7,7 +7,7 @@
 
 <h2>Inventaire</h2>
 
-@if (!Model.Any())
+@if (!Model.Articles.Any())
 {
     <p>Pas d'article présent.</p>
 }
@@ -22,7 +22,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var article in Model)
+            @foreach (var article in Model.Articles)
             {
                 <tr>
                     <td>@article.NomArticle</td>

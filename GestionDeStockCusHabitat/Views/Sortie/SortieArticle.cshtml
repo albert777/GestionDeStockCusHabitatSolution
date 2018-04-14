@@ -1,4 +1,4 @@
-﻿@model Sortie
+﻿@model GestionDeStockCusHabitat.ViewModel.SortieViewModel
 @using GestionDeStockCusHabitat.Models
 
 @{
@@ -10,18 +10,18 @@
 @using (Html.BeginForm("SortirUnArticle", "Sortie"))
 {
     <div class="form-group">
-        @Html.LabelFor(a => a.Article.NomArticle)
-        @Html.DropDownListFor(a => a.Article.NomArticle, , "Selectionner un article")
+        @Html.LabelFor(a => a.NomArticle)
+        @Html.DropDownListFor(a => a.NomArticle, Model.ArticleList, new {@class = "form-control"})
     </div>
     <div class="form-group">
-        @Html.LabelFor(a => a.Article.QteArticle)
-        @Html.TextBoxFor(a => a.Article.QteArticle, new { @class = "form-control", pattern = @"\d{*}" })
+        @Html.LabelFor(a => a.QteArticle)
+        @Html.TextBoxFor(a => a.QteArticle, new { @class = "form-control", pattern = @"\d{*}" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(a => a.Client)
-        @Html.DropDownListFor(a => a.Client.Id, , "Selectionner un client")
+        @Html.LabelFor(a => a.ClientList)
+        @Html.DropDownListFor(a => a.ClientId, Model.ClientList, new {@class = "form-control"})
     </div>
-    @Html.HiddenFor(s => s.Article.Id, )
-    @Html.HiddenFor(s => s.Id)
+    <div class="form-group">
+    </div>
     <button type="submit" class="btn btn-primary">Valider la sortie</button>
 }

@@ -1,5 +1,5 @@
 ﻿
-@model GestionDeStockCusHabitat.Models.Client
+@model GestionDeStockCusHabitat.ViewModel.ClientViewModel
 
 @{
     ViewBag.Title = "Ajouter article";
@@ -21,6 +21,5 @@
         @Html.LabelFor(c => c.Email)
         @Html.TextBoxFor(c => c.Email, new { @class = "form-control" })
     </div>
-    @Html.HiddenFor(e => e.Id)
     <button type="submit" class="btn btn-primary">Ajouter</button>
 }

@@ -7,9 +7,13 @@ namespace GestionDeStockCusHabitat.Models
     {
         public int Id { get; set; }
         [Required][Display(Name = "Nom de l'article")]
-        public Article Article { get; set; }
+        public String NomArticle { get; set; }
+        [Required][Display(Name = "Catégorie")]
+        public String Categorie { get; set; }
+        [Required][Display(Name = "Quantité")]
+        public int QteArticle { get; set; }
         public DateTime DateTime { get; set; }
         [Required][Display(Name = "Client")]
-        public Client Client { get; set; }
+        public int ClientId { get; set; }
     }
 }

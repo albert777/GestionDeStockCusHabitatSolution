@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using GestionDeStockCusHabitat.Models;
@@ -17,9 +16,12 @@ namespace GestionDeStockCusHabitat.Controllers
         [Route("sortie")]
         public ActionResult Sortie()
         {
-            var model = new SortieViewModel();
-            model.Sorties = new List<Sortie>();
-            return View(model);
+            using (var dbcontext = new ApplicationDbContext())
+            {
+                var model = new SortieViewModel {Sorties = dbcontext.Sorties.ToList()};
+                return View(model);
+            }
+
         }
 
         /// <summary>
@@ -29,13 +31,31 @@ namespace GestionDeStockCusHabitat.Controllers
         [Route("sortie/sortiearticle")]
         public ActionResult SortieArticle()
         {
-            return View();
+            var dbContext = new ApplicationDbContext();
+            var model = new SortieViewModel
+            {
+                ArticleList = new SelectList(dbContext.Articles.Select(c => c.NomArticle), "NomArticle"),
+                ClientList = new SelectList(dbContext.Clients.Select(c => new {c.Nom, c.Prenom}))
+            };
+            
+            return View(model);
         }
 
         public ActionResult SortirUnArticle(Sortie sortie)
         {
-            return RedirectToAction("Sortie","Sortie");
+            using (var dbContext = new ApplicationDbContext())
+            {
+                sortie.Categorie = dbContext.Articles
+                    .Where(a => a.NomArticle == sortie.NomArticle)
+                    .Select(a => a.NomArticle).Single();
+                sortie.DateTime = DateTime.Now;
+                dbContext.Sorties.Add(sortie);
+                var articleMisAJour = dbContext.Articles.Where(a => a.NomArticle == sortie.NomArticle).Select(a => a).Single();
+                articleMisAJour.QteArticle = articleMisAJour.QteArticle - sortie.QteArticle;
 
+                dbContext.SaveChanges();
+                return RedirectToAction("Entree","Entree");
+            }
         }
     }
 }

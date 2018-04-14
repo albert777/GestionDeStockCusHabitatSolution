@@ -19,7 +19,6 @@ else
                 <th>Nom de l'article</th>
                 <th>Quantité</th>
                 <th>Catégorie</th>
-                <th>Pour</th>
                 <th>Heure et date de sortie</th>
             </tr>
         </thead>
@@ -27,10 +26,9 @@ else
             @foreach (var sorties in Model.Sorties)
             {
                 <tr>
-                    <td>@sorties.Article.NomArticle</td>
-                    <td>@sorties.Article.QteArticle</td>
-                    <td>@sorties.Article.Categorie</td>
-                    <td>@sorties.Client.Nom @sorties.Client.Prenom</td>
+                    <td>@sorties.NomArticle</td>
+                    <td>@sorties.QteArticle</td>
+                    <td>@sorties.Categorie</td>
                     <td>@sorties.DateTime.ToShortTimeString() - @sorties.DateTime.ToShortDateString()</td>
                 </tr>
             }

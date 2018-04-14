@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using GestionDeStockCusHabitat.Models;
+using GestionDeStockCusHabitat.ViewModel;
 
 namespace GestionDeStockCusHabitat.Controllers
 {
@@ -14,18 +12,6 @@ namespace GestionDeStockCusHabitat.Controllers
     [Authorize]
     public class EntreeController : Controller
     {
-        public ApplicationDbContext DbContext;
-
-        public EntreeController()
-        {
-            DbContext = new ApplicationDbContext();
-            
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            DbContext.Dispose();
-        }
 
         /// <summary>
         /// Route affichant les entrées
@@ -35,8 +21,13 @@ namespace GestionDeStockCusHabitat.Controllers
         [Route("entree")]
         public ActionResult Entree()
         {
-            var entrees = DbContext.Entrees.ToList();
-            return View(entrees);
+            using (var dbContext = new ApplicationDbContext())
+            {
+                var model = new EntreeViewModel();
+                model.Entrees = dbContext.Entrees.ToList();
+                return View(model);
+            }
+
         }
 
         /// <summary>
@@ -46,31 +37,29 @@ namespace GestionDeStockCusHabitat.Controllers
         [Route("entree/ajouter")]
         public ActionResult Ajouter()
         {
-            return View();
+            var dbContext = new ApplicationDbContext();
+            var model = new EntreeViewModel
+            {
+                ArticleList = new SelectList(dbContext.Articles.Select(c => c.NomArticle), "NomArticle")
+            };
+            return View(model);
         }
 
-        public ActionResult Create(Article article)
+        public ActionResult Create(Entree entree)
         {
-            //On instancie un objet Entree
-            var entree = new Entree();
+            using (var dbContext = new ApplicationDbContext())
+            {
+                entree.Categorie = dbContext.Articles.Where(a => a.NomArticle == entree.NomArticle)
+                    .Select(a => a.NomArticle).Single();
+                entree.DateTime = DateTime.Now;
+                dbContext.Entrees.Add(entree);
 
-            //La catégorie de l'article est récuperer via la variable req qui est associé a une requetre
-            var req = DbContext.Articles.Where(a => a.NomArticle == article.NomArticle).Select(a=>a.Categorie).Single();
+                var articleMisAJour = dbContext.Articles.Where(a => a.NomArticle == entree.NomArticle).Select(a => a).Single();
+                articleMisAJour.QteArticle = articleMisAJour.QteArticle + entree.QteArticle;
 
-            //On attribue les valeurs récuperer grace au formulaire, a l'objet entree
-            entree.QteArticle = article.QteArticle;
-            entree.NomArticle = article.NomArticle;
-            entree.Categorie = req;
-            entree.DateTime = DateTime.Now;
-
-            //On incrémente la quantité de l'article avec la quantité de l'article concerné dans la table Articles
-            var articleStocker =DbContext.Articles.Where(a => a.NomArticle == article.NomArticle).Select(a=>a).Single();
-            articleStocker.QteArticle = articleStocker.QteArticle + article.QteArticle;
-
-            DbContext.Entrees.Add(entree);
-            DbContext.SaveChanges();
-
-            return RedirectToAction("Entree","Entree");
+                dbContext.SaveChanges();
+                return RedirectToAction("Entree","Entree");
+            }
 
         }
     }

@@ -1,4 +1,4 @@
-﻿@model List<GestionDeStockCusHabitat.Models.Entree>
+﻿@model GestionDeStockCusHabitat.ViewModel.EntreeViewModel
 
 @{
     ViewBag.Title = "Entrees";
@@ -7,9 +7,7 @@
 
 <h2>Les Entrées</h2>
 
-@*Retourne sous forme de tableau les données présentent dans la table Entree
-    Model fait réference au @model List<GestionDeStockCusHabitat.Models.Entree>*@
-@if (!Model.Any())
+@if (!Model.Entrees.Any())
 {
     <p>Pas d'articles entrées</p>
 }
@@ -25,7 +23,7 @@ else
         </tr>
         </thead>
         <tbody>
-        @foreach (var entrees in Model)
+        @foreach (var entrees in Model.Entrees)
         {
             <tr>
                 <td>@entrees.NomArticle</td>

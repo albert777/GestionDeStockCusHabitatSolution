@@ -1,4 +1,4 @@
-﻿@model List<GestionDeStockCusHabitat.Models.Client>
+﻿@model GestionDeStockCusHabitat.ViewModel.ClientViewModel
 
 @{
     ViewBag.Title = "Liste des clients";
@@ -7,7 +7,7 @@
 
 <h2>Clients</h2>
 
-@if (!Model.Any())
+@if (!Model.Clients.Any())
 {
     <p>Aucun client présent</p>
 }
@@ -22,7 +22,7 @@ else
         </tr>
         </thead>
         <tbody>
-        @foreach (var clients in Model)
+        @foreach (var clients in Model.Clients)
         {
             <tr>
                 <td>@clients.Nom</td>

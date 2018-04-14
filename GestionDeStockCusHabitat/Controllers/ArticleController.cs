@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using GestionDeStockCusHabitat.Models;
+using GestionDeStockCusHabitat.ViewModel;
 
 namespace GestionDeStockCusHabitat.Controllers
 {
@@ -10,25 +11,16 @@ namespace GestionDeStockCusHabitat.Controllers
     [Authorize]
     public class ArticleController : Controller
     {
-        // GET: Inventaire
-        private ApplicationDbContext _dbContext;
-
-        public ArticleController()
-        {
-            _dbContext = new ApplicationDbContext();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _dbContext.Dispose();
-        }
 
         [Route("article")]
         public ActionResult Article()
         {
-            var article = _dbContext.Articles.ToList();
-
-            return View(article);
+            using (var dbcontext = new ApplicationDbContext())
+            {
+                var model = new ArticleViewModel();
+                model.Articles = dbcontext.Articles.ToList();
+                return View(model);
+            }
         }
 
         /// <summary>
@@ -38,7 +30,12 @@ namespace GestionDeStockCusHabitat.Controllers
         [Route("article/ajouter")]
         public ActionResult Ajouter()
         {
-            return View();
+            using (var dbcontext = new ApplicationDbContext())
+            {
+                var model = new ArticleViewModel();
+                model.Articles = dbcontext.Articles.ToList();
+                return View(model);
+            }
         }
 
         /// <summary>
@@ -49,12 +46,13 @@ namespace GestionDeStockCusHabitat.Controllers
         [HttpPost]
         public ActionResult Create(Article article)
         {
-
-            _dbContext.Articles.Add(article);
-            _dbContext.SaveChanges();
+            using (var dbcontext = new ApplicationDbContext())
+            {
+                dbcontext.Articles.Add(article);
+                dbcontext.SaveChanges();
+            }
 
             return RedirectToAction("Article","Article");
-
         }
 
     }

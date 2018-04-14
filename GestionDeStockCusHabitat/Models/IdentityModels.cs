@@ -26,7 +26,7 @@ namespace GestionDeStockCusHabitat.Models
         public DbSet<Article> Articles { get; set; }
 
         public ApplicationDbContext()
-            : base("GestionDeStock", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
